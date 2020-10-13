@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ViewPropTypes,
 } from "react-native";
+import theme from "../../../../src/common/theme";
 
 const getSegmentedBackgroundColor = (theme, colorValueFromProps) => {
   return colorValueFromProps || (theme === "LIGHT" ? "#E5E5EA" : "#4a5568");
@@ -92,10 +93,12 @@ const SegmentedControl = (props) => {
             top: 0,
             marginVertical: 2,
             marginHorizontal: 2,
-            backgroundColor: getActiveSegmentedBackgroundColor(
+            backgroundColor: props.isBorder?null:getActiveSegmentedBackgroundColor(
               props?.theme,
               props?.activeSegmentBackgroundColor
             ),
+             borderColor: props.isBorder?props.borderColor:null,
+            borderBottomWidth:props.isBorder?props.borderBottomWidth:null,
             borderRadius: 8,
             ...shadow,
           },
@@ -196,6 +199,7 @@ SegmentedControl.propTypes = {
 SegmentedControl.defaultProps = {
   tabs: [],
   onChange: () => {},
+  isBorder:false,
   currentIndex: 0,
   segmentedControlBackgroundColor: null,
   activeSegmentBackgroundColor: null,
@@ -209,6 +213,8 @@ SegmentedControl.defaultProps = {
   isRTL: false,
   theme: "LIGHT",
   shadowStyle: null,
+  borderBottomWidth:3,
+  borderColor:theme.red
 };
 
 export default SegmentedControl;
